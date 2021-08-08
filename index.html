@@ -14,49 +14,24 @@
     
     <script type="text/processing">
     
-      PImage img;       // The source image
-int cellsize = 2 ; // Dimensions of each cell in the grid
-int cols, rows;   // Number of columns and rows in our system
-int a = 0;
+      float y = 180;
 
+// The statements in the setup() block 
+// run once when the program begins
 void setup() {
-  size(600, 800, P3D); 
-  img  = loadImage("ZUS.png"); // Load the image
-  img.resize(600, 800);
-  cols = width/cellsize;             // Calculate # of columns
-  rows = height/cellsize;            // Calculate # of rows
-  frameRate(25);
-
+  size(640, 360);  // Size should be the first statement
+  stroke(255);  // Set line drawing color to white
+  noLoop();
 }
 
-  void draw() {
-  background(0);
-  loadPixels();
-  a = a + 1;
- 
-  // Begin loop for columns
-  for ( int i = 0; i < cols;i++) {
-    // Begin loop for rows
-    for ( int j = 0; j < rows;j++) {
-      int x = i*cellsize + cellsize/2; // x position
-      int y = j*cellsize + cellsize/2; // y position
-      int loc = x + y*width;           // Pixel array location
-      color c = img.pixels[loc];       // Grab the color
-      // Calculate a z position as a function of mouseX and pixel brightness
-      float z = ((mouseX*4/(float)width) * brightness(img.pixels[loc]));
-      // Translate to the location, set fill and stroke, and draw the rect
-      pushMatrix();
-      translate(x,y,z);
-      fill(c);
-      noStroke();
-      rectMode(CENTER);
-      //fill(random(c),random(c),random(c),random(c));
-      rect(0,0,cellsize+a/40,cellsize+a/40);
-      
-      popMatrix();
-    }
-  }
-}
+// In this example, the code in the draw() block 
+// runs only once because of the noLoop() in setup()
+void draw() { 
+  background(0);   // Set the background to black
+  line(0, y, width, y);  
+  y = y - 1; 
+  if (y < 0) { y = height; } 
+} 
 
     </script>
     <canvas id="sketch" style="border: 1px solid black;"></canvas>
