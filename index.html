@@ -43,7 +43,7 @@ void setup() {
       int loc = x + y*width;           // Pixel array location
       color c = img.pixels[loc];       // Grab the color
       // Calculate a z position as a function of mouseX and pixel brightness
-      float z = ((mouseX*4/(float)width) * brightness(img.pixels[loc]));
+      float z = ((4/(float)width) * brightness(img.pixels[loc]));
       // Translate to the location, set fill and stroke, and draw the rect
       pushMatrix();
       translate(x,y,z);
